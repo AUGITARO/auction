@@ -44,7 +44,7 @@ class UserController extends Controller
 
             if ($login_form->validate()) {
                 Yii::$app->user->login(User::findOne(['email' => $login_form->email]));
-                return $this->redirect(["site/index"]);
+                return $this->redirect(['site/index']);
             }
         }
 
@@ -66,7 +66,7 @@ class UserController extends Controller
                 $signup_form->validate()
                 && (new UserService())->create($signup_form)
             ) {
-                return $this->redirect(["site/index"]);
+                return $this->redirect(['site/index']);
             }
         }
 
@@ -78,7 +78,7 @@ class UserController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->redirect(["site/index"]);
+        return $this->redirect(['site/index']);
     }
 
 }
