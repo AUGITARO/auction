@@ -62,10 +62,11 @@ class UserController extends Controller
             $signup_form->load(Yii::$app->request->post());
             $signup_form->avatar = UploadedFile::getInstance($signup_form, 'avatar');
 
-            if ($signup_form->validate()) {
-                if ((new UserService())->create($signup_form)) {
-                    return $this->redirect(["site/index"]);
-                }
+            if (
+                $signup_form->validate()
+                && (new UserService())->create($signup_form)
+            ) {
+                return $this->redirect(["site/index"]);
             }
         }
 

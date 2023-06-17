@@ -54,6 +54,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function rules(): array
     {
+        // TODO: Двойные на одинарные кавычки;
         return [
             [["email"], "trim"],
             [["email"], "required"],

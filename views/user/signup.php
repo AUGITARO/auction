@@ -9,8 +9,6 @@ use yii\widgets\ActiveForm;
 $this->registerCssFile('css/signup.css');
 $this->title = Yii::$app->name . ' | Регистрация';
 
-// TODO: Привести к сдному стилю кавычки;
-// TODO: Привести к сдному стилю кавычки;
 
 ?>
 <div class="wrapper">

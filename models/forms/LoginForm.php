@@ -5,6 +5,8 @@ namespace app\models\forms;
 use app\models\User;
 use yii\base\Model;
 
+// TODO: Двойные на одинарные кавычки (илюхе скину! задача не для бэкэнда)
+
 class LoginForm extends Model
 {
     public $email;

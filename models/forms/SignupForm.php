@@ -16,6 +16,7 @@ class SignupForm extends Model
 
     public function rules(): array
     {
+        // TODO: Двойные на одинарные кавычки;
         return [
             [["email"], "trim"],
             [["email"], "required"],
