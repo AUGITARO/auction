@@ -8,9 +8,32 @@ use yii\web\Controller;
 use app\models\forms\LoginForm;
 use app\models\forms\SignupForm;
 use yii\web\UploadedFile;
+use app\models\User;
+use yii\filters\AccessControl;
 
 class UserController extends Controller
 {
+    public function behaviors(): array
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@']
+                    ],
+                    [
+                        'actions' => ['login', 'signup'],
+                        'allow' => true,
+                        'roles' => ['?']
+                    ],
+                ]
+            ]
+        ];
+    }
+
     public function actionLogin()
     {
         $this->layout = 'main';
@@ -20,8 +43,8 @@ class UserController extends Controller
             $login_form->load(Yii::$app->request->post());
 
             if ($login_form->validate()) {
-                var_dump(1);
-                exit;
+                Yii::$app->user->login(User::findOne(['email' => $login_form->email]));
+                return $this->redirect(["site/index"]);
             }
         }
 
@@ -50,5 +73,14 @@ class UserController extends Controller
             'model' => $signup_form,
         ]);
     }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+        return $this->redirect(["site/index"]);
+    }
+
 }
+
+
 

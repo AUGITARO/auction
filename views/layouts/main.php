@@ -18,6 +18,7 @@ $this->registerCsrfMetaTags();
 </head>
 <body>
 <?php $this->beginBody() ?>
+    <?= $this->render('_main-header') ?>
 
     <main>
         <?= $content ?>

@@ -2,6 +2,7 @@
 
 namespace app\models\forms;
 
+use app\models\User;
 use yii\base\Model;
 
 class LoginForm extends Model
@@ -20,6 +21,7 @@ class LoginForm extends Model
             [["password"], "trim"],
             [["password"], "required"],
             [["password"], "string", "max" => 128],
+            [["password"], "validatePassword"]
         ];
     }
 
@@ -30,4 +32,16 @@ class LoginForm extends Model
             'password' => 'Пароль',
         ];
     }
+
+    public function validatePassword($attribute, $params): void
+    {
+        if (!$this->hasErrors()) {
+            $user = User::findOne(['email' => $this->email]);
+            if (!$user || !$user->validatePasswordHash($this->password)) {
+                $this->addError($attribute, 'Неправильный email или пароль');
+            }
+        }
+    }
 }
+
+

@@ -40,8 +40,8 @@ class SignupForm extends Model
             [["contacts"], "trim"],
             [["contacts"], "string", "max" => 128],
 
+            [["avatar"], "required"],
             [["avatar"], "file", 'extensions' => 'png, jpg, jpeg'],
-
         ];
     }
 
