@@ -16,7 +16,7 @@ class m230326_000003_create_lot_table extends Migration
             'id' => $this->primaryKey()->unsigned(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'name' => $this->string(128)->notNull(),
-            'description' => $this->string(128)->null(),
+            'description' => $this->string(512)->null(),
             'picture_path' => $this->string(128)->null(),
             'start_price' => $this->integer()->notNull(),
             'completion_date' => $this->dateTime()->notNull(),

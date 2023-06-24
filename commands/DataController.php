@@ -21,7 +21,6 @@ class DataController extends Controller
             'username' => 'jenny',
             'contacts' => '88005553535',
             'avatar_path' => './avatar1.png',
-
         ],
         [
             'email' => '30jordanSega@gmail.com',

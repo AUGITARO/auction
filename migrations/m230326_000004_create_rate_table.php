@@ -15,7 +15,7 @@ class m230326_000004_create_rate_table extends Migration
         $this->createTable('{{%rate}}', [
             'id' => $this->primaryKey()->unsigned(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'price' => $this->integer()->notNull(),
+            'price' => $this->integer()->unsigned()->notNull(),
             'user_id' => $this->integer()->unsigned()->notNull(),
             'lot_id' => $this->integer()->unsigned()->notNull(),
         ]);

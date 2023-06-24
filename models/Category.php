@@ -17,11 +17,18 @@ class Category extends ActiveRecord
         return '{{category}}';
     }
 
-    // public function rules(): array
-    // {
-    //     return [
-    //         [['name'], 'required'],
-    //         [['symbol_code'], 'required'],
-    //     ];
-    // }
+     public function rules(): array
+     {
+         return [
+             [['name'], 'trim'],
+             [['name'], 'required'],
+             [['name'], 'string', 'max' => 128],
+             [['name'], 'unique', 'targetClass' => Category::class, 'targetAttribute' => 'name'],
+
+             [['symbol_code'], 'trim'],
+             [['symbol_code'], 'required'],
+             [['symbol_code'], 'string', 'max' => 128],
+             [['symbol_code'], 'unique', 'targetClass' => Category::class, 'targetAttribute' => 'symbol_code'],
+         ];
+     }
 }

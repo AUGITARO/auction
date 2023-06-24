@@ -5,8 +5,6 @@ namespace app\models\forms;
 use app\models\User;
 use yii\base\Model;
 
-// TODO: Двойные на одинарные кавычки (илюхе скину! задача не для бэкэнда)
-
 class LoginForm extends Model
 {
     public $email;
@@ -15,15 +13,15 @@ class LoginForm extends Model
     public function rules(): array
     {
         return [
-            [["email"], "trim"],
-            [["email"], "required"],
-            [["email"], "string", "max" => 128],
-            [["email"], "email"],
+            [['email'], 'trim'],
+            [['email'], 'required'],
+            [['email'], 'string', 'max' => 128],
+            [['email'], 'email'],
 
-            [["password"], "trim"],
-            [["password"], "required"],
-            [["password"], "string", "max" => 128],
-            [["password"], "validatePassword"]
+            [['password'], 'trim'],
+            [['password'], 'required'],
+            [['password'], 'string', 'max' => 128],
+            [['password'], 'validatePassword']
         ];
     }
 

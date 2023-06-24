@@ -16,33 +16,32 @@ class SignupForm extends Model
 
     public function rules(): array
     {
-        // TODO: Двойные на одинарные кавычки;
         return [
-            [["email"], "trim"],
-            [["email"], "required"],
-            [["email"], "string", "max" => 128],
-            [["email"], "email"],
-            [["email"], "unique", "targetClass" => User::class, "targetAttribute" => "email"],
+            [['email'], 'trim'],
+            [['email'], 'required'],
+            [['email'], 'string', 'max' => 128],
+            [['email'], 'email'],
+            [['email'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'email'],
 
-            [["password"], "trim"],
-            [["password"], "required"],
-            [["password"], "string", "max" => 128],
+            [['password'], 'trim'],
+            [['password'], 'required'],
+            [['password'], 'string', 'max' => 128],
 
-            [["password_repeat"], "trim"],
-            [["password_repeat"], "required"],
-            [["password_repeat"], "string", "max" => 128],
+            [['password_repeat'], 'trim'],
+            [['password_repeat'], 'required'],
+            [['password_repeat'], 'string', 'max' => 128],
             [['password_repeat'], 'compare', 'compareAttribute' => 'password'],
 
-            [["username"], "trim"],
-            [["username"], "required"],
-            [["username"], "string", "max" => 128],
-            [["username"], "unique", "targetClass" => User::class, "targetAttribute" => "username"],
+            [['username'], 'trim'],
+            [['username'], 'required'],
+            [['username'], 'string', 'max' => 128],
+            [['username'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'username'],
 
-            [["contacts"], "trim"],
-            [["contacts"], "string", "max" => 128],
+            [['contacts'], 'trim'],
+            [['contacts'], 'string', 'max' => 128],
 
-            [["avatar"], "required"],
-            [["avatar"], "file", 'extensions' => 'png, jpg, jpeg'],
+            [['avatar'], 'required'],
+            [['avatar'], 'file', 'extensions' => 'png, jpg, jpeg'],
         ];
     }
 
