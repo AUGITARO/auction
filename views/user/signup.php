@@ -35,6 +35,19 @@ $this->title = Yii::$app->name . ' | Регистрация';
                 <?= $form->field($model, 'email')->input('email', ['placeholder' => 'Введите вашу почту.']) ?>
                 <?= $form->field($model, 'password')->input('password', ['placeholder' => 'Придумайте надежный пароль.']) ?>
                 <?= $form->field($model, 'password_repeat')->input('password', ['placeholder' => 'Повторите пароль.']) ?>
+
+                <style>
+                    .form-check-input:checked {
+                        background-color: lime;
+                        border-color: lime;
+                    }
+                </style>
+
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                    <label class="form-check-label" for="password-btn">Показать пароль</label>
+                </div>
+
                 <?= $form->field($model, 'username')->textInput(['placeholder' => 'Представьтесь']) ?>
                 <?= $form->field($model, 'contacts')->textarea(['placeholder' => 'Как с вами связаться']) ?>
                 <?= $form->field($model, 'avatar')->fileInput() ?>
@@ -49,3 +62,17 @@ $this->title = Yii::$app->name . ' | Регистрация';
         </div>
     </div>
 </div>
+
+<script>
+    const inputElements = document.querySelectorAll('input[type=password]');
+    const btnElement = document.querySelector('.form-check-input');
+    for (const inputElement of inputElements) {
+        btnElement.addEventListener("change", () => {
+            if (inputElement.type === 'password') {
+                inputElement.type = 'text';
+            } else {
+                inputElement.type = 'password';
+            }
+        });
+    }
+</script>
