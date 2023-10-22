@@ -1,88 +1,11 @@
-* {
-    margin: 0;
-}
-
 body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(180deg, #e66465, #9198e5);
+    background-image: url('../img/1674267797_balthazar-club-p-pank-estetika-oboi-30.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.wrapper {
-    display: flex;
-    padding-top: 10px;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 400px;
-    background-color: #fbf7f7;
-    border-radius: 15px;
+main {
+    padding: 50px 0;
+    min-height: 100vh;
 }
-
-.field {
-    margin-bottom: 30px;
-}
-
-.label {
-    display: block;
-    margin-bottom: 0.25rem;
-}
-  /* стили для input */
-.input {
-    display: block;
-    width: 300px;
-    height: calc(2.25rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #bdbdbd;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.registration {
-    font-weight: 700;
-    color: white;
-    text-decoration: none;
-    padding: .8em 1em calc(.8em + 3px);
-    border-radius: 15px;
-    background: rgb(64,199,129);
-    box-shadow: 0 -3px rgb(53,167,110) inset;
-    transition: 0.2s;
-    margin-bottom: 50px;
-  } 
-
-.registration:hover { 
-    background: rgb(53, 167, 110); 
-}
-
-.registration:active {
-    background: rgb(33,147,90);
-    box-shadow: 0 3px rgb(33,147,90) inset;
-}
-
-.text {
-    margin: 50px;
-    font-weight: 700;
-    font-size: 25px;
-    margin-bottom: 20px;
-}
-
-.already {
-    text-decoration: none;
-    color: #bdbdbd;
-    margin-bottom: 30px;
-}
-
-.wrapper textarea {
-    resize: none;
-    height: 100px;
-}
-

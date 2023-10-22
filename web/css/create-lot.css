@@ -1,0 +1,13 @@
+body {
+    background-image: url('../img/1674267821_balthazar-club-p-pank-estetika-oboi-23.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

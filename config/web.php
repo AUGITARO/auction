@@ -52,12 +52,14 @@ $config = [
                 '/login' => 'user/login',
                 '/signup' => 'user/signup',
                 '/logout' => 'user/logout',
+                '/create' => 'lot/create',
+                '/lot' => 'lot/view',
             ],
         ],
     ],
     'params' => $params,
     'language' => 'ru',
-    'name' => '!%?#*@]',
+    'name' => 'AuMaster',
 ];
 
 if (YII_ENV_DEV) {

@@ -61,9 +61,9 @@ class User extends ActiveRecord implements IdentityInterface
             [['email'], 'email'],
             [['email'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'email'],
 
-            [['password'], 'trim'],
-            [['password'], 'required'],
-            [['password'], 'string', 'max' => 128],
+            [['password_hash'], 'trim'],
+            [['password_hash'], 'required'],
+            [['password_hash'], 'string', 'max' => 128],
 
             [['username'], 'trim'],
             [['username'], 'required'],
@@ -73,8 +73,8 @@ class User extends ActiveRecord implements IdentityInterface
             [['contacts'], 'trim'],
             [['contacts'], 'string', 'max' => 128],
 
-            [['avatar'], 'required'],
-            [['avatar'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['avatar_path'], 'required'],
+            [['avatar_path'], 'file', 'extensions' => 'png, jpg, jpeg'],
         ];
     }
 }

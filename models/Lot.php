@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -13,6 +14,11 @@ use yii\db\ActiveRecord;
  * @property string $start_price
  * @property string $completion_date
  * @property string $rate_step
+ * @property int $user_id
+ * @property int $category_id
+ *
+ * @property User $user
+ * @property Category $category
  */
 class Lot extends ActiveRecord
 {
@@ -20,6 +26,7 @@ class Lot extends ActiveRecord
     {
         return '{{lot}}';
     }
+
 
     public function rules(): array
     {
@@ -48,11 +55,21 @@ class Lot extends ActiveRecord
 
             [['user_id'], 'required'],
             [['user_id'], 'integer'],
-            [['user_id'], 'exist', 'targetClass' => Lot::class, 'targetAttribute' => 'user_id'],
+            [['user_id'], 'exist', 'targetClass' => User::class, 'targetAttribute' => 'id'],
 
             [['category_id'], 'required'],
             [['category_id'], 'integer'],
-            [['category_id'], 'exist', 'targetClass' => Lot::class, 'targetAttribute' => 'category_id'],
+            [['category_id'], 'exist', 'targetClass' => Category::class, 'targetAttribute' => 'id'],
         ];
+    }
+
+    public function getUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function getCategory(): ActiveQuery
+    {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 }
