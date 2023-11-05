@@ -5,13 +5,14 @@ namespace app\controllers;
 use app\models\forms\CreateLotForm;
 use app\models\User;
 use app\models\Category;
+use app\models\Lot;
 use app\services\LotService;
 use Yii;
-use yii\web\Controller;
 use yii\filters\AccessControl;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
-use app\models\Lot;
 
 class LotController extends Controller
 {
@@ -65,7 +66,10 @@ class LotController extends Controller
     {
         $this->layout = 'main';
         $this->user = User::findOne(Yii::$app->user->id);
-        $lot = Lot::findOne($lot_id);
+
+        if (!$lot = Lot::findOne($lot_id)) {
+            throw new NotFoundHttpException();
+        }
 
         return $this->render("view", [
             'lot' => $lot

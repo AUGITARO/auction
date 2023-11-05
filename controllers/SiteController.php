@@ -22,7 +22,7 @@ class SiteController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'error'],
                         'allow' => true,
                         'roles' => ['?', '@']
                     ],
@@ -51,6 +51,11 @@ class SiteController extends Controller
         return $this->render('index', [
             'lots' => $lots,
         ]);
+    }
+
+    public function actionError(): string
+    {
+        return 'error';
     }
 
 }
