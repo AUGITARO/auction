@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -10,6 +11,7 @@ use yii\db\ActiveRecord;
  * @propertyprice
  * @property int $user_id
  * @property int $lot_id
+ * @property User $user
  */
 class Rate extends ActiveRecord
 {
@@ -32,5 +34,10 @@ class Rate extends ActiveRecord
             [['lot_id'], 'integer'],
             [['lot_id'], 'exist', 'targetClass' => Rate::class, 'targetAttribute' => 'lot_id'],
         ];
+    }
+
+    public function getUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

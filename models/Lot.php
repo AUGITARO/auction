@@ -19,6 +19,7 @@ use yii\db\ActiveRecord;
  *
  * @property User $user
  * @property Category $category
+ * @property Rate[] $rates
  */
 class Lot extends ActiveRecord
 {
@@ -71,5 +72,10 @@ class Lot extends ActiveRecord
     public function getCategory(): ActiveQuery
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
+    public function getRates(): ActiveQuery
+    {
+        return $this->hasMany(Rate::class, ['lot_id' => 'id']);
     }
 }

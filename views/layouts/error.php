@@ -4,13 +4,9 @@
 /** @var string $content */
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use app\assets\AppAsset;
 
-AppAsset::register($this);
-
-$this->registerCsrfMetaTags();
-$this->registerCssFile('css/style.css');
+$this->registerCssFile('css/error.css');
 
 ?>
 <?php $this->beginPage() ?>
@@ -22,13 +18,10 @@ $this->registerCssFile('css/style.css');
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="<?= parse_url(Url::canonical())['path'] === '/lot' ? 'main-column' : '' ?>">
+<body>
 <?php $this->beginBody() ?>
-    <?= $this->render('_main-header') ?>
 
-    <main>
-        <?= $content ?>
-    </main>
+    <?= $content ?>
 
 <?php $this->endBody() ?>
 </body>

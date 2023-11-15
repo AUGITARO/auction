@@ -19,7 +19,7 @@ class m230326_000003_create_lot_table extends Migration
             'description' => $this->string(512)->null(),
             'picture_path' => $this->string(128)->null(),
             'start_price' => $this->integer()->notNull(),
-            'completion_date' => $this->dateTime()->notNull(),
+            'completion_date' => $this->date()->notNull(),
             'rate_step' => $this->integer()->unsigned()->notNull(),
             'user_id' => $this->integer()->unsigned()->notNull(),
             'category_id' => $this->integer()->unsigned()->notNull(),

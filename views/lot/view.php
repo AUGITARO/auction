@@ -13,7 +13,7 @@ $this->registerCssFile('css/view.css');
 <div class="container">
     <div class="row mt-5">
         <div class="col">
-            <h1><?= Html::encode($lot->name) ?></h1>
+            <h1 class="text-light"><?= Html::encode($lot->name) ?></h1>
         </div>
     </div>
 
@@ -42,15 +42,15 @@ $this->registerCssFile('css/view.css');
                     <div class="p-4 bg-dark rounded-3">
                         <div class="timer">
                             <img class="timer-icon" src="/img/timer.png" alt="timer">
-                            <p class="text-light">2023-12-12</p>
+                            <p class="text-light"><?= Html::encode($lot->completion_date) ?></p>
                         </div>
                         <div>
                             <p class="m-0 mt-3 text-light">Текущая цена</p>
-                            <p class="fs-3 fw-bold text-light">10000000 &#8381;</p>
+                            <p class="fs-3 fw-bold text-light"><?= Html::encode($lot->start_price) ?> &#8381;</p>
                         </div>
                         <div>
                             <p class="m-0 mt-3 text-light">Мин. ставка</p>
-                            <p class="fs-3 fw-bold text-light">100000</p>
+                            <p class="fs-3 fw-bold text-light"><?= Html::encode($lot->start_price + $lot->rate_step) ?></p>
                         </div>
                         <form
                             class="d-flex justify-content-between needs-validation"
@@ -58,6 +58,7 @@ $this->registerCssFile('css/view.css');
                             method="post"
                             enctype="application/x-www-form-urlencoded"
                             autocomplete="off"
+                            novalidate
                         >
                             <div>
                                 <label for="validationCustom03" class="form-label text-light">Ставите?</label>
@@ -72,29 +73,18 @@ $this->registerCssFile('css/view.css');
             <div class="row mt-4">
                 <div class="col">
                     <div class="p-4 bg-dark rounded-3">
-                        <p class="text-light p-0 fs-3">История ставок (4)</p>
+                        <p class="text-light p-0 fs-3">История ставок (<?= count($lot->rates)?>) </p>
                         <table class="table table-sm table-dark table-striped mt-2">
                             <tbody>
-                                <tr>
-                                    <td>Челик1</td>
-                                    <td>10000</td>
-                                    <td>2ч. назад</td>
-                                </tr>
-                                <tr>
-                                    <td>Челик2</td>
-                                    <td>1000</td>
-                                    <td>3ч. назад</td>
-                                </tr>
-                                <tr>
-                                    <td>Челик3</td>
-                                    <td>1000</td>
-                                    <td>3ч. назад</td>
-                                </tr>
-                                <tr>
-                                    <td>Челик4</td>
-                                    <td>1000</td>
-                                    <td>3ч. назад</td>
-                                </tr>
+
+                                <?php foreach ($lot->rates as $rate): ?>
+                                    <tr>
+                                        <td><?= Html::encode($rate->user->username) ?></td>
+                                        <td><?= Html::encode($rate->price) ?></td>
+                                        <td><?= date('Y-m-d', strtotime($rate->created_at)) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+
                             </tbody>
                         </table>
                     </div>

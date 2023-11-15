@@ -55,7 +55,15 @@ class SiteController extends Controller
 
     public function actionError(): string
     {
-        return 'error';
-    }
+        $this->layout = 'error';
+        $message = match ($status = Yii::$app->response->statusCode) {
+            403 => 'Страница недоступна',
+            404 => 'Страница не найдена',
+        };
 
+        return $this->render('error', [
+            'message' => $message,
+            'status' => $status,
+        ]);
+    }
 }
