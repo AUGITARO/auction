@@ -3,6 +3,7 @@
 namespace app\models\forms;
 
 use app\models\Category;
+use app\models\User;
 use yii\base\model;
 
 class CreateLotForm extends Model
@@ -13,6 +14,7 @@ class CreateLotForm extends Model
     public $completion_date;
     public $rate_step;
     public $category_id;
+    public $user_id;
     public $picture;
 
     public function rules(): array
@@ -39,6 +41,10 @@ class CreateLotForm extends Model
             [['category_id'], 'required'],
             [['category_id'], 'integer'],
             [['category_id'], 'exist', 'targetClass' => Category::class, 'targetAttribute' => 'id'],
+
+            [['user_id'], 'required'],
+            [['user_id'], 'integer'],
+            [['user_id'], 'exist', 'targetClass' => User::class, 'targetAttribute' => 'id'],
 
             [['picture'], 'required'],
             [['picture'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1048576 * 2],

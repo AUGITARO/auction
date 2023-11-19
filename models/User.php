@@ -17,6 +17,33 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public function rules(): array
+    {
+        return [
+            [['email'], 'trim'],
+            [['email'], 'required'],
+            [['email'], 'string', 'max' => 128],
+            [['email'], 'email'],
+            [['email'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'email'],
+
+            [['password_hash'], 'trim'],
+            [['password_hash'], 'required'],
+            [['password_hash'], 'string', 'max' => 128],
+
+            [['username'], 'trim'],
+            [['username'], 'required'],
+            [['username'], 'string', 'max' => 128],
+            [['username'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'username'],
+
+            [['contacts'], 'trim'],
+            [['contacts'], 'string', 'max' => 128],
+
+            [['avatar_path'], 'required'],
+            [['avatar_path'], 'file', 'extensions' => 'png, jpg, jpeg'],
+        ];
+    }
+
+    // IdentityInterface
     public static function tableName(): string
     {
         return '{{user}}';
@@ -50,31 +77,5 @@ class User extends ActiveRecord implements IdentityInterface
     public function validatePasswordHash(string $password): bool
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
-    }
-
-    public function rules(): array
-    {
-        return [
-            [['email'], 'trim'],
-            [['email'], 'required'],
-            [['email'], 'string', 'max' => 128],
-            [['email'], 'email'],
-            [['email'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'email'],
-
-            [['password_hash'], 'trim'],
-            [['password_hash'], 'required'],
-            [['password_hash'], 'string', 'max' => 128],
-
-            [['username'], 'trim'],
-            [['username'], 'required'],
-            [['username'], 'string', 'max' => 128],
-            [['username'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'username'],
-
-            [['contacts'], 'trim'],
-            [['contacts'], 'string', 'max' => 128],
-
-            [['avatar_path'], 'required'],
-            [['avatar_path'], 'file', 'extensions' => 'png, jpg, jpeg'],
-        ];
     }
 }

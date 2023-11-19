@@ -7,10 +7,11 @@ use yii\db\ActiveRecord;
 
 /**
  * @property int $id
- * @property string $create_at
- * @propertyprice
+ * @property string $created_at
+ * @property int $price
  * @property int $user_id
  * @property int $lot_id
+ *
  * @property User $user
  */
 class Rate extends ActiveRecord
@@ -28,11 +29,11 @@ class Rate extends ActiveRecord
 
             [['user_id'], 'required'],
             [['user_id'], 'integer'],
-            [['user_id'], 'exist', 'targetClass' => Rate::class, 'targetAttribute' => 'user_id'],
+            [['user_id'], 'exist', 'targetClass' => User::class, 'targetAttribute' => 'id'],
 
             [['lot_id'], 'required'],
             [['lot_id'], 'integer'],
-            [['lot_id'], 'exist', 'targetClass' => Rate::class, 'targetAttribute' => 'lot_id'],
+            [['lot_id'], 'exist', 'targetClass' => Lot::class, 'targetAttribute' => 'id'],
         ];
     }
 

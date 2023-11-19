@@ -2,12 +2,6 @@
 
 namespace app\commands;
 
-use app\models\Category;
-use app\models\Lot;
-use app\models\Rate;
-use app\models\User;
-// use app\models\{User, Category, Rate, Lot};
-use Yii;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\helpers\BaseInflector;

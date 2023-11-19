@@ -59,6 +59,8 @@ class SiteController extends Controller
         $message = match ($status = Yii::$app->response->statusCode) {
             403 => 'Страница недоступна',
             404 => 'Страница не найдена',
+            400 => 'Bad Request',
+            default => 'example'
         };
 
         return $this->render('error', [

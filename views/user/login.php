@@ -31,7 +31,6 @@ $this->title = Yii::$app->name . ' | Вход';
                 ],
             ]); ?>
 
-
             <h1 class="fs-3 mt-0 text-center">Вход</h1>
 
             <?= $form->field($model, 'email')->input('email', ['placeholder' => 'Введите вашу почту.']) ?>

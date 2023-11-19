@@ -2,9 +2,11 @@
 
 /** @var yii\web\View $this */
 /** @var app\models\Lot $lot */
+/** @var app\models\forms\CreateRateForm $model */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\bootstrap5\ActiveForm;
 
 $this->title = Yii::$app->name . ' | ' . $lot->name;
 $this->registerCssFile('css/view.css');
@@ -52,21 +54,30 @@ $this->registerCssFile('css/view.css');
                             <p class="m-0 mt-3 text-light">Мин. ставка</p>
                             <p class="fs-3 fw-bold text-light"><?= Html::encode($lot->start_price + $lot->rate_step) ?></p>
                         </div>
-                        <form
-                            class="d-flex justify-content-between needs-validation"
-                            action="#"
-                            method="post"
-                            enctype="application/x-www-form-urlencoded"
-                            autocomplete="off"
-                            novalidate
-                        >
-                            <div>
-                                <label for="validationCustom03" class="form-label text-light">Ставите?</label>
-                                <input type="text" class="form-control" id="validationCustom03" required>
-                                <div class="invalid-feedback text-light">Пожалуйста, введите ставку</div>
-                            </div>
-                            <input class="align-self-end ms-auto btn btn-success" type="submit" value="Поставить!">
-                        </form>
+
+                        <?php $form = ActiveForm::begin([
+                            'method' => 'post',
+                            'action' => Url::to(['lot/view', 'lot_id' => $lot->id]),
+                            'enableAjaxValidation' => false,
+                            'options' => [
+                                'class' => 'd-flex justify-content-between needs-validation',
+                                'enctype' => 'application/x-www-form-urlencoded',
+                                'novalidate' => true,
+                            ],
+                            'fieldConfig' => [
+//                              'options' => ['class' => ''],
+                                'labelOptions' => ['class' => 'form-label text-light'],
+//                                'inputOptions' => ['class' => 'form-control'],
+                                'errorOptions' => ['class' => 'invalid-feedback'],
+//                              'template' => '{label}{input}{error}',
+                            ]
+                        ]); ?>
+
+                            <?= $form->field($model, 'price')->input('number', ['placeholder' => 'Введите ставку']) ?>
+                            <?= Html::submitInput('Поставить', ['class' => 'align-self-start btn btn-success ms-auto', 'style' => 'margin-top: 32px;']) ?>
+
+                        <?php ActiveForm::end(); ?>
+
                     </div>
                 </div>
             </div>

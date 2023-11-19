@@ -6,7 +6,9 @@ use app\models\forms\CreateLotForm;
 use app\models\User;
 use app\models\Category;
 use app\models\Lot;
+use app\models\forms\CreateRateForm;
 use app\services\LotService;
+use app\services\RateService;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -43,10 +45,8 @@ class LotController extends Controller
 
         if (Yii::$app->request->isPost) {
             $create_lot_form->load(Yii::$app->request->post());
+            $create_lot_form->user_id = $this->user->id;
             $create_lot_form->picture = UploadedFile::getInstance($create_lot_form, 'picture');
-
-//            var_dump($create_lot_form->picture);
-//            exit;
 
             if (
                 $create_lot_form->validate()
@@ -71,9 +71,21 @@ class LotController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $model = new CreateRateForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            $model->user_id = $this->user->id;
+            $model->lot_id = $lot_id;
+
+            if ($model->validate()) {
+                (new RateService())->create($model);
+            }
+        }
+
         return $this->render("view", [
-            'lot' => $lot
+            'lot' => $lot,
+            'model' => $model,
         ]);
     }
-
 }
