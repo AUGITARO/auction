@@ -23,10 +23,10 @@ $category_id = $this->context->category_id ?? null;
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
                             <?php if (parse_url(Url::canonical())['path'] === '/'): ?>
-                                <div class="btn-group ms-auto">
+                                <div class="btn-group" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                     <a
                                             href="<?= Url::to(['site/index']) ?>"
                                             class="btn btn-outline-warning<?= !isset($category_id) ? ' active' : '' ?>"
@@ -43,7 +43,7 @@ $category_id = $this->context->category_id ?? null;
                                 </div>
                             <?php endif; ?>
 
-                            <ul class="navbar-nav ms-5<?= parse_url(Url::canonical())['path'] !== '/' ? ' ms-auto' : '' ?>">
+                            <ul class="navbar-nav <?= parse_url(Url::canonical())['path'] !== '/' ? ' ms-auto' : '' ?>">
 
                                 <?php if (Yii::$app->user->isGuest): ?>
                                     <li class="nav-item">
@@ -53,11 +53,15 @@ $category_id = $this->context->category_id ?? null;
                                         <a class="nav-link" href="<?= Url::to(['user/signup'])?>">Регистрация</a>
                                     </li>
                                 <?php else: ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?= Url::to(['user/logout'])?>">Выход</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<?= Url::to(['lot/create'])?>">Создать ЛОТ +</a>
+                                    <li class="nav-item dropdown" data-bs-theme="light" >
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <?= Html::encode($user->username) ?>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="<?= Url::to(['lot/create'])?>">Создать ЛОТ +</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<?= Url::to(['user/logout'])?>">Выход</a></li>
+                                        </ul>
                                     </li>
                                 <?php endif; ?>
 

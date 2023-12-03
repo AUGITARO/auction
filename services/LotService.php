@@ -2,9 +2,8 @@
 
 namespace app\services;
 
-use app\models\forms\CreateLotForm;
 use app\models\Lot;
-use Yii;
+use app\models\forms\CreateLotForm;
 
 class LotService
 {
@@ -27,5 +26,15 @@ class LotService
         }
 
         return $lot->save();
+    }
+
+    public function getLotList(?int $category_id = null): array
+    {
+        $query = Lot::find();
+        if (isset($category_id)) {
+            $query->where(['category_id' => $category_id]);
+        }
+
+        return $query->all();
     }
 }

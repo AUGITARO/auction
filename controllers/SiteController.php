@@ -3,11 +3,12 @@
 namespace app\controllers;
 
 use app\models\Category;
-use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use app\models\User;
 use app\models\Lot;
+use app\models\User;
+use app\services\LotService;
+use Yii;
+use yii\helpers\Url;
+use yii\web\Controller;
 
 class SiteController extends Controller
 {
@@ -15,38 +16,25 @@ class SiteController extends Controller
     public $categories;
     public $category_id;
 
-    public function behaviors(): array
+    public function beforeAction($action): bool
     {
-        return [
-            'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'actions' => ['index', 'error'],
-                        'allow' => true,
-                        'roles' => ['?', '@']
-                    ],
-                ]
-            ]
-        ];
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $this->layout = 'main';
+        $this->user = User::findOne(Yii::$app->user->id);
+        Url::remember();
+
+        return true;
     }
 
     public function actionIndex(?int $category_id = null): string
     {
-        $this->layout = 'main';
-
-        $query = Lot::find();
-        if (isset($category_id)) {
-            $query->where(['category_id' => $category_id]);
-        }
-        $lots = $query->all();
-
         $this->categories = Category::find()->all();
         $this->category_id = $category_id;
 
-        if (isset(Yii::$app->user->id)) {
-            $this->user = User::findOne(Yii::$app->user->id);
-        }
+        $lots = (new LotService())->getLotList($category_id);
 
         return $this->render('index', [
             'lots' => $lots,

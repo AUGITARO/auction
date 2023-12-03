@@ -31,7 +31,7 @@ $config = [
             'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',
             // send all mails to a file by default.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -48,10 +48,15 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => true,
             'rules' => [
+                // SiteController
                 '/' => 'site/index',
+
+                // UserController
                 '/login' => 'user/login',
-                '/signup' => 'user/signup',
                 '/logout' => 'user/logout',
+                '/signup' => 'user/signup',
+
+                // LotController
                 '/create' => 'lot/create',
                 '/lot' => 'lot/view',
             ],

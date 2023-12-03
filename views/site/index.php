@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->registerCssFile('css/index.css');
+$this->title = Yii::$app->name . ' | Главная';
 
 ?>
 <section class="py-5">

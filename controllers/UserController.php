@@ -2,14 +2,16 @@
 
 namespace app\controllers;
 
-use app\services\UserService;
-use Yii;
-use yii\web\Controller;
+use app\models\User;
 use app\models\forms\LoginForm;
 use app\models\forms\SignupForm;
-use yii\web\UploadedFile;
-use app\models\User;
+use app\services\UserService;
+use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
+use yii\web\Controller;
+use yii\web\Response;
+use yii\web\UploadedFile;
 
 class UserController extends Controller
 {
@@ -34,48 +36,52 @@ class UserController extends Controller
         ];
     }
 
-    public function actionLogin()
+    public function beforeAction($action): bool
     {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
         $this->layout = 'main';
-        $login_form = new LoginForm();
 
-        if (Yii::$app->request->isPost) {
-            $login_form->load(Yii::$app->request->post());
+        return true;
+    }
 
-            if ($login_form->validate()) {
-                Yii::$app->user->login(User::findOne(['email' => $login_form->email]));
-                return $this->redirect(['site/index']);
+    public function actionLogin(): Response|string
+    {
+        $model = new LoginForm();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                Yii::$app->user->login(User::findOne(['email' => $model->email]));
+                return $this->redirect(Url::previous() ?? ['site/index']);
             }
         }
 
         return $this->render('login', [
-            'model' => $login_form,
+            'model' => $model,
         ]);
     }
 
-    public function actionSignup()
+    public function actionSignup(): Response|string
     {
-        $this->layout = 'main';
-        $signup_form = new SignupForm();
+        $model = new SignupForm();
 
-        if (Yii::$app->request->isPost) {
-            $signup_form->load(Yii::$app->request->post());
-            $signup_form->avatar = UploadedFile::getInstance($signup_form, 'avatar');
+        if ($model->load(Yii::$app->request->post())) {
+            $model->avatar = UploadedFile::getInstance($model, 'avatar');
 
-            if (
-                $signup_form->validate()
-                && (new UserService())->create($signup_form)
-            ) {
+            if ($model->validate()) {
+                (new UserService())->create($model);
                 return $this->redirect(['site/index']);
             }
         }
 
         return $this->render('signup', [
-            'model' => $signup_form,
+            'model' => $model,
         ]);
     }
 
-    public function actionLogout()
+    public function actionLogout(): Response
     {
         Yii::$app->user->logout();
         return $this->redirect(['site/index']);
