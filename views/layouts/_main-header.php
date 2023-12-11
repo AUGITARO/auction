@@ -59,6 +59,7 @@ $category_id = $this->context->category_id ?? null;
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li><a class="dropdown-item" href="<?= Url::to(['lot/create'])?>">Создать ЛОТ +</a></li>
+                                            <li><a class="dropdown-item" href="<?= Url::to(['rate/index'])?>">Мои ставки</a></li>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="<?= Url::to(['user/logout'])?>">Выход</a></li>
                                         </ul>

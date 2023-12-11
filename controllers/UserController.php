@@ -9,11 +9,10 @@ use app\services\UserService;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use yii\web\Controller;
 use yii\web\Response;
 use yii\web\UploadedFile;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     public function behaviors(): array
     {
@@ -34,17 +33,6 @@ class UserController extends Controller
                 ]
             ]
         ];
-    }
-
-    public function beforeAction($action): bool
-    {
-        if (!parent::beforeAction($action)) {
-            return false;
-        }
-
-        $this->layout = 'main';
-
-        return true;
     }
 
     public function actionLogin(): Response|string
@@ -86,7 +74,6 @@ class UserController extends Controller
         Yii::$app->user->logout();
         return $this->redirect(['site/index']);
     }
-
 }
 
 

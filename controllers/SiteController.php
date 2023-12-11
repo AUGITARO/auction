@@ -3,31 +3,13 @@
 namespace app\controllers;
 
 use app\models\Category;
-use app\models\Lot;
-use app\models\User;
 use app\services\LotService;
 use Yii;
-use yii\helpers\Url;
-use yii\web\Controller;
 
-class SiteController extends Controller
+class SiteController extends BaseController
 {
-    public $user;
     public $categories;
     public $category_id;
-
-    public function beforeAction($action): bool
-    {
-        if (!parent::beforeAction($action)) {
-            return false;
-        }
-
-        $this->layout = 'main';
-        $this->user = User::findOne(Yii::$app->user->id);
-        Url::remember();
-
-        return true;
-    }
 
     public function actionIndex(?int $category_id = null): string
     {

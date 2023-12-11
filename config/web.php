@@ -59,6 +59,9 @@ $config = [
                 // LotController
                 '/create' => 'lot/create',
                 '/lot' => 'lot/view',
+
+                // RateController
+                '/my-rates' => 'rate/index',
             ],
         ],
     ],

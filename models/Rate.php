@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  * @property int $user_id
  * @property int $lot_id
  *
+ * @property Lot $lot
  * @property User $user
  */
 class Rate extends ActiveRecord
@@ -40,5 +41,10 @@ class Rate extends ActiveRecord
     public function getUser(): ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function getlot(): ActiveQuery
+    {
+        return $this->hasOne(Lot::class, ['id' => 'lot_id']);
     }
 }

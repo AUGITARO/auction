@@ -2,38 +2,20 @@
 
 namespace app\controllers;
 
-use app\models\forms\CreateLotForm;
-use app\models\User;
 use app\models\Category;
-use app\models\Lot;
+use app\models\forms\CreateLotForm;
 use app\models\forms\CreateRateForm;
+use app\models\Lot;
 use app\services\LotService;
 use app\services\RateService;
 use Yii;
 use yii\filters\AccessControl;
-use yii\helpers\Url;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
 
 class LotController extends BaseController
 {
-    public $user;
-
-    public function beforeAction($action): bool
-    {
-        if (!parent::beforeAction($action)) {
-            return false;
-        }
-
-        $this->layout = 'main';
-        $this->user = User::findOne(Yii::$app->user->id);
-        Url::remember();
-
-        return true;
-    }
-
     public function behaviors(): array
     {
         return [
